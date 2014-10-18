@@ -2,6 +2,7 @@ package gameObjects;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import core.Game;
 
@@ -40,7 +41,7 @@ public class UserBall {
 		Vx = -3;
 	}
 	
-	public void slow(Game G){
+	public void slow(){
 		// down arrow key response
 		Vx *= 0.3;
 	}
@@ -96,5 +97,9 @@ public class UserBall {
         int y = (int) Math.round(Py);
         g.fillOval(x-radius, y-radius, radius*2, radius*2);
     }
+	
+	public Rectangle getBounds() {
+		return new Rectangle((int)Px, (int)Py, radius*2, radius*2);
+	}
 
 }

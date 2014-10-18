@@ -96,7 +96,7 @@ public class Game extends Applet implements Runnable, KeyListener{
                 break;
             case KeyEvent.VK_DOWN:
             	// call object methods that happen when key is pressed
-            	Ball.slow(this);
+            	Ball.slow();
                 break;
         }
     }
