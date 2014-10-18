@@ -1,5 +1,7 @@
 package gameObjects;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Platform {
@@ -13,10 +15,31 @@ public class Platform {
 	 * and physics feeling correct.
 	 */
 	
-	private int height;
-	private int width;
-	private double Px;
-	private double Py;
+	private int height = 50;
+	private int width = 200;
+	private int Px = 400;
+	private int Py = 500;
+	
+	public void Platform(){
+		
+	}
+	
+	public void update(UserBall b){
+		if (b.getBounds().intersects(getBounds())){
+			if ((b.getPy()+b.getRadius() > Py) || (b.getPy() < Py+height)){
+				b.setVy(-b.getVy());
+			}else if ((b.getPx()+b.getRadius() < Px) || (b.getPx()-b.getRadius() > Px+width)){
+				b.setVx(-b.getVx());
+			}
+		}
+	}
+	
+	public void paint(Graphics g){
+        g.setColor(Color.BLUE);
+        // Paint a circle. Shifted so that paints with center at [x,y] instead 
+        // of corner at that point.
+        g.fillRect(Px, Py, width, height);
+    }
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int)Px, (int)Py, width, height);
