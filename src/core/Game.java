@@ -1,5 +1,7 @@
 package core;
 
+import gameObjects.UserBall;
+
 import java.applet.Applet;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,6 +12,7 @@ public class Game extends Applet implements Runnable, KeyListener{
     
     private Image i;
     private Graphics doubleG;
+    UserBall Ball;
     
     
     @Override
@@ -21,6 +24,7 @@ public class Game extends Applet implements Runnable, KeyListener{
 
     @Override
     public void start() {
+    	Ball = new UserBall();
         // thread takes a run method which in this case is specified by this 
         // (the run method implemented in the class)
         Thread thread = new Thread(this); 
@@ -30,6 +34,7 @@ public class Game extends Applet implements Runnable, KeyListener{
     public void run() {
     	// thread info
         while(true){
+        	Ball.update(this);
             repaint(); // goes through update() then calls paint()
             try {
                 Thread.sleep(17);
@@ -67,6 +72,7 @@ public class Game extends Applet implements Runnable, KeyListener{
     @Override
     public void paint(Graphics g) {
     	//paint the game objects on the screen by calling their individual paint methods
+    	Ball.paint(g);
     }
 
     public void keyTyped(KeyEvent arg0) {
@@ -78,7 +84,19 @@ public class Game extends Applet implements Runnable, KeyListener{
         switch(ke.getKeyCode()){
             case KeyEvent.VK_SPACE:
             	// call object methods that happen when key is pressed
-            	// UserBall.jump();
+            	Ball.jump(this);
+                break;
+            case KeyEvent.VK_LEFT:
+            	// call object methods that happen when key is pressed
+            	Ball.moveLeft();
+                break;
+            case KeyEvent.VK_RIGHT:
+            	// call object methods that happen when key is pressed
+            	Ball.moveRight();
+                break;
+            case KeyEvent.VK_DOWN:
+            	// call object methods that happen when key is pressed
+            	Ball.slow(this);
                 break;
         }
     }
