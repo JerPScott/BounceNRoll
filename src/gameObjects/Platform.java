@@ -26,9 +26,25 @@ public class Platform {
 	
 	public void update(UserBall b){
 		if (b.getBounds().intersects(getBounds())){
-			if ((b.getPy()+b.getRadius() > Py) || (b.getPy() < Py+height)){
+			if (b.getPy() < Py){
+				// ball is on top of platform
+				System.out.println("top");
+				b.setPy(Py-b.getRadius());
 				b.setVy(-b.getVy());
-			}else if ((b.getPx()+b.getRadius() < Px) || (b.getPx()-b.getRadius() > Px+width)){
+			}else if (b.getPy() > Py+height){
+				// ball is under platform
+				System.out.println("bot");
+				b.setPy(Py+b.getRadius());
+				b.setVy(-b.getVy());
+			}else if (b.getPx() < Px){
+				// ball is to the left of the platform
+				System.out.println("left");
+				b.setPx(Px-b.getRadius());
+				b.setVx(-b.getVx());
+			}else if (b.getPx() > Px+width){
+				//ball is to the right of the platform
+				System.out.println("right");
+				b.setPx(Px+b.getRadius());
 				b.setVx(-b.getVx());
 			}
 		}

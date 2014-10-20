@@ -114,6 +114,14 @@ public class UserBall {
 		return Px;
 	}
 	
+	public void setPy(double newPy){
+		Py = newPy;
+	}
+	
+	public void setPx(double newPx){
+		Px = newPx;
+	}
+	
 	public double getVy(){
 		return Vy;
 	}
