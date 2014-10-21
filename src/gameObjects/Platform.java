@@ -18,36 +18,33 @@ public class Platform {
 	private int height = 50;
 	private int width = 200;
 	private int Px = 400;
-	private int Py = 500;
+	private int Py = 400;
+	private int BRad;
+	private double BVy;
+	private double BVx;
+	private double BPx;
+	private double BPy;
 	
 	public void Platform(){
 		
 	}
 	
 	public void update(UserBall b){
-		if (b.getBounds().intersects(getBounds())){
-			if (b.getPy() < Py){
+		BPx = b.getPx();
+		BPy = b.getPy();
+		BVx = b.getVx();
+		BVy = b.getVy();
+		BRad = b.getRadius();
+		System.out.println(BVy);
+			if  ((BPy+BRad > Py) && (BPy+BRad < Py+BRad) && (BPx+(0.5)*BRad > Px) && (BPx-(0.5)*BRad < Px+width)){
 				// ball is on top of platform
-				System.out.println("top");
-				b.setPy(Py-b.getRadius());
-				b.setVy(-b.getVy());
-			}else if (b.getPy() > Py+height){
-				// ball is under platform
-				System.out.println("bot");
-				b.setPy(Py+b.getRadius());
-				b.setVy(-b.getVy());
-			}else if (b.getPx() < Px){
-				// ball is to the left of the platform
-				System.out.println("left");
-				b.setPx(Px-b.getRadius());
-				b.setVx(-b.getVx());
-			}else if (b.getPx() > Px+width){
-				//ball is to the right of the platform
-				System.out.println("right");
-				b.setPx(Px+b.getRadius());
-				b.setVx(-b.getVx());
+				BPy = Py-BRad;
+				BVy = -60;
 			}
-		}
+		b.setPx(BPx);
+		b.setPy(BPy);
+		b.setVx(BVx);
+		b.setVy(BVy);
 	}
 	
 	public void paint(Graphics g){
@@ -58,7 +55,7 @@ public class Platform {
     }
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int)Px, (int)Py, width, height);
+		return new Rectangle((int)Px, (int)Py, width-1, height-1);
 	}
 	
 }

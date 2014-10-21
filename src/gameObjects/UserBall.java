@@ -86,7 +86,6 @@ public class UserBall {
             // position formula
             Py += Vy*dt + 0.5*gravity*dt*dt;
         }
-		
 	}
 	
 	public void paint(Graphics g){
@@ -99,7 +98,7 @@ public class UserBall {
     }
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int)Px, (int)Py, radius*2, radius*2);
+		return new Rectangle((int)Px, (int)Py, radius*2-1, radius*2-1);
 	}
 	
 	public int getRadius(){
