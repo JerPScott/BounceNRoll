@@ -1,5 +1,6 @@
 package core;
 
+import gameObjects.GoalCoin;
 import gameObjects.Platform;
 import gameObjects.UserBall;
 
@@ -15,6 +16,7 @@ public class Game extends Applet implements Runnable, KeyListener{
     private Graphics doubleG;
     UserBall Ball;
     Platform plat;
+    GoalCoin GC;
     
     
     @Override
@@ -28,6 +30,7 @@ public class Game extends Applet implements Runnable, KeyListener{
     public void start() {
     	Ball = new UserBall();
     	plat = new Platform();
+    	GC = new GoalCoin();
         // thread takes a run method which in this case is specified by this 
         // (the run method implemented in the class)
         Thread thread = new Thread(this); 
@@ -39,6 +42,7 @@ public class Game extends Applet implements Runnable, KeyListener{
         while(true){
         	Ball.update(this);
         	plat.update(Ball);
+        	GC.update(Ball);
             repaint(); // goes through update() then calls paint()
             try {
                 Thread.sleep(17);
@@ -78,6 +82,7 @@ public class Game extends Applet implements Runnable, KeyListener{
     	//paint the game objects on the screen by calling their individual paint methods
     	Ball.paint(g);
     	plat.paint(g);
+    	GC.paint(g);
     }
 
     public void keyTyped(KeyEvent arg0) {
