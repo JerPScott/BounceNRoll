@@ -25,8 +25,15 @@ public class Platform {
 	private double BPx;
 	private double BPy;
 	
-	public void Platform(){
+	public Platform(){
 		
+	}
+	
+	public Platform(int platXPos, int platYPos, int platHeight, int platWidth){
+		height = platHeight;
+		width = platWidth;
+		Px = platXPos;
+		Py = platYPos;
 	}
 	
 	public void update(UserBall b){

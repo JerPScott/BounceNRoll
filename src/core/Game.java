@@ -1,5 +1,6 @@
 package core;
 
+import gameObjects.Coin;
 import gameObjects.GoalCoin;
 import gameObjects.Platform;
 import gameObjects.UserBall;
@@ -11,12 +12,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Game extends Applet implements Runnable, KeyListener{
+	
+	// have an array of levels and encase the entire game loop in a for loop that cycles through the level array
+	// the loop will move to the next level once GoalCoin is gotten
     
     private Image i;
     private Graphics doubleG;
     UserBall Ball;
-    Platform plat;
+    Platform plat[];
     GoalCoin GC;
+    Coin Cn[]; // try out coin array
     
     
     @Override
@@ -29,8 +34,14 @@ public class Game extends Applet implements Runnable, KeyListener{
     @Override
     public void start() {
     	Ball = new UserBall();
-    	plat = new Platform();
-    	GC = new GoalCoin();
+    	GC = new GoalCoin(300,200);
+    	plat = new Platform[2];
+    	plat[0] = new Platform();
+    	plat[1] = new Platform(450, 250, 50, 200);
+    	Cn = new Coin[3];
+    	Cn[0] = new Coin(100,400);
+    	Cn[1] = new Coin(50,400);
+    	Cn[2] = new Coin(150,400);
         // thread takes a run method which in this case is specified by this 
         // (the run method implemented in the class)
         Thread thread = new Thread(this); 
@@ -41,8 +52,13 @@ public class Game extends Applet implements Runnable, KeyListener{
     	// thread info
         while(true){
         	Ball.update(this);
-        	plat.update(Ball);
+        	for (Platform P : plat){
+        		P.update(Ball);
+        	}
         	GC.update(Ball);
+        	for (Coin coin : Cn){
+        		coin.update(Ball);
+        	}
             repaint(); // goes through update() then calls paint()
             try {
                 Thread.sleep(17);
@@ -81,8 +97,13 @@ public class Game extends Applet implements Runnable, KeyListener{
     public void paint(Graphics g) {
     	//paint the game objects on the screen by calling their individual paint methods
     	Ball.paint(g);
-    	plat.paint(g);
+    	for (Platform P : plat){
+    		P.paint(g);
+    	}
     	GC.paint(g);
+    	for (Coin coin : Cn){
+    		coin.paint(g);
+    	}
     }
 
     public void keyTyped(KeyEvent arg0) {
