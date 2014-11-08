@@ -1,4 +1,5 @@
 package levels;
 
-public class LevelOne{
+public class LevelOne extends LevelTemplate{
+	
 }
