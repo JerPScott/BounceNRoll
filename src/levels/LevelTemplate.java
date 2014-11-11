@@ -9,27 +9,16 @@ public class LevelTemplate {
 	Platform Plat[];
 	GoalCoin GC;
 	
-	public LevelTemplate(){
-		GC = new GoalCoin(300,200);
-    	Plat = new Platform[2];
-    	Plat[0] = new Platform();
-    	Plat[1] = new Platform(450, 250, 50, 200);
-    	Cn = new Coin[3];
-    	Cn[0] = new Coin(100,400);
-    	Cn[1] = new Coin(50,400);
-    	Cn[2] = new Coin(150,400);
-	}
-	
 	public GoalCoin getGC(){
-		return GC;
+		return this.GC;
 	}
 	
 	public Coin[] getCoin(){
-		return Cn;
+		return this.Cn;
 	}
 	
 	public Platform[] getPlat(){
-		return Plat;
+		return this.Plat;
 	}
 }
 
