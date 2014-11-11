@@ -5,7 +5,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class GoalCoin {
-	
+	/**
+	 * This object serves as the win condition of the level and is similar to coins.
+	 * 
+	 **/
 	private int Px;
 	private int Py;
 	private int radius = 10;
@@ -36,6 +39,10 @@ public class GoalCoin {
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int)Px, (int)Py, radius*2-1, radius*2-1);
+	}
+	
+	public boolean getGotten(){
+		return gotten;
 	}
 	
 }

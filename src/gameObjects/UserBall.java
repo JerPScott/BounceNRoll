@@ -7,6 +7,10 @@ import java.awt.Rectangle;
 import core.Game;
 
 public class UserBall {
+	/**
+	 * This is the player controlled object in the game.
+	 * 
+	 **/
 	private int radius = 15;
 	private double dt = 0.2; // changing time
 	private double Px = 0; // x position

@@ -5,7 +5,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Coin {
-	
+	/**
+	 * Coins are for now just for show. They will disappear when the userball goes over them. Eventually
+	 * they will be worth points.
+	 * 
+	 **/
 	private int Px;
 	private int Py;
 	private int radius = 10;
