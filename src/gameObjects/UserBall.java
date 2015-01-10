@@ -7,11 +7,15 @@ import java.awt.Rectangle;
 import core.Game;
 
 public class UserBall {
+	/**
+	 * This is the player controlled object in the game.
+	 * 
+	 **/
 	private int radius = 15;
 	private double dt = 0.2; // changing time
 	private double Px = 0; // x position
 	private double Py = 0; // y position
-	private double Vx = 20; // x velocity
+	private double Vx = 0; // x velocity
 	private double Vy; // y velocity
 	private double gravity = 10;
 	private double energyLoss = 0.6; // the ratio of velocity retained when bouncing
@@ -98,7 +102,7 @@ public class UserBall {
     }
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int)Px, (int)Py, radius*2-1, radius*2-1);
+		return new Rectangle((int)Px-radius, (int)Py-radius, radius*2, radius*2);
 	}
 	
 	public int getRadius(){

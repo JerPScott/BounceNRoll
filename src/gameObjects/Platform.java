@@ -6,14 +6,11 @@ import java.awt.Rectangle;
 
 public class Platform {
 	
-	/* Consider implementing the Platforms as an iterable linkedlist 
-	 * because then the ball can iterate through the list and 
-	 * detect which if any platform it has collided with. It could
-	 * then take the appropriate action.
+	/**
+	 * This is the first type of platform. It will shoot the ball up if the ball comes from underneath.
+	 * Also this platform will cause the ball to bounce off of it if approached from above.
 	 * 
-	 * For now I will only make one platform to get the collision
-	 * and physics feeling correct.
-	 */
+	 **/
 	
 	private int height = 50;
 	private int width = 200;
@@ -25,8 +22,15 @@ public class Platform {
 	private double BPx;
 	private double BPy;
 	
-	public void Platform(){
+	public Platform(){
 		
+	}
+	
+	public Platform(int platXPos, int platYPos, int platHeight, int platWidth){
+		height = platHeight;
+		width = platWidth;
+		Px = platXPos;
+		Py = platYPos;
 	}
 	
 	public void update(UserBall b){
@@ -35,7 +39,6 @@ public class Platform {
 		BVx = b.getVx();
 		BVy = b.getVy();
 		BRad = b.getRadius();
-		System.out.println(BVy);
 			if  ((BPy+BRad > Py) && (BPy+BRad < Py+BRad) && (BPx+(0.5)*BRad > Px) && (BPx-(0.5)*BRad < Px+width)){
 				// ball is on top of platform
 				BPy = Py-BRad;

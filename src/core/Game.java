@@ -1,5 +1,7 @@
 package core;
 
+import gameObjects.Coin;
+import gameObjects.GoalCoin;
 import gameObjects.Platform;
 import gameObjects.UserBall;
 
@@ -9,12 +11,24 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import levels.LevelLibrary;
+import levels.LevelObject;
+
 public class Game extends Applet implements Runnable, KeyListener{
+	/**
+	 * This is the main frame of the game. It controls the updating of the game objects,
+	 * and what level the player is on. 
+	 **/
     
     private Image i;
     private Graphics doubleG;
     UserBall Ball;
-    Platform plat;
+    LevelObject CurrentLvl;
+    GoalCoin CurrentGC;
+    LevelLibrary LvlLibrary;
+    Platform Plat[];
+    Coin Cn[];
+    GoalCoin GC;
     
     
     @Override
@@ -26,8 +40,9 @@ public class Game extends Applet implements Runnable, KeyListener{
 
     @Override
     public void start() {
+    	LvlLibrary = new LevelLibrary();
     	Ball = new UserBall();
-    	plat = new Platform();
+    	CurrentLvl = LvlLibrary.getLevel_1();
         // thread takes a run method which in this case is specified by this 
         // (the run method implemented in the class)
         Thread thread = new Thread(this); 
@@ -37,8 +52,24 @@ public class Game extends Applet implements Runnable, KeyListener{
     public void run() {
     	// thread info
         while(true){
+        	CurrentGC = CurrentLvl.getGC();
+        	if (CurrentGC.getGotten() && (CurrentLvl.getNextLevel() != null)){
+        		CurrentLvl = CurrentLvl.getNextLevel();
+        		try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+        		Ball = new UserBall();
+        	}
         	Ball.update(this);
-        	plat.update(Ball);
+        	for (Platform P : CurrentLvl.getPlat()){
+        		P.update(Ball);
+        	}
+        	CurrentLvl.getGC().update(Ball);
+        	for (Coin coin : CurrentLvl.getCoin()){
+        		coin.update(Ball);
+        	}
             repaint(); // goes through update() then calls paint()
             try {
                 Thread.sleep(17);
@@ -77,7 +108,13 @@ public class Game extends Applet implements Runnable, KeyListener{
     public void paint(Graphics g) {
     	//paint the game objects on the screen by calling their individual paint methods
     	Ball.paint(g);
-    	plat.paint(g);
+    	for (Platform P : CurrentLvl.getPlat()){
+    		P.paint(g);
+    	}
+    	CurrentLvl.getGC().paint(g);
+    	for (Coin coin : CurrentLvl.getCoin()){
+    		coin.paint(g);
+    	}
     }
 
     public void keyTyped(KeyEvent arg0) {
