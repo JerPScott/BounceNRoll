@@ -39,11 +39,13 @@ public class Platform {
 		BVx = b.getVx();
 		BVy = b.getVy();
 		BRad = b.getRadius();
-			if  ((BPy+BRad > Py) && (BPy+BRad < Py+BRad) && (BPx+(0.5)*BRad > Px) && (BPx-(0.5)*BRad < Px+width)){
-				// ball is on top of platform
-				BPy = Py-BRad;
-				BVy = -60;
-			}
+		
+		if  ((BPy+BRad > Py) && (BPy+BRad < Py+BRad) && (BPx+(0.5)*BRad > Px) && (BPx-(0.5)*BRad < Px+width)){
+			// ball is on top of platform
+			BPy = Py-BRad;
+			BVy = -60;
+		}
+		
 		b.setPx(BPx);
 		b.setPy(BPy);
 		b.setVx(BVx);

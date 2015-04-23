@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import points.PlayerStatus;
+
 public class Coin {
 	/**
 	 * Coins are for now just for show. They will disappear when the userball goes over them. Eventually
@@ -20,9 +22,10 @@ public class Coin {
 		Py = yPos;
 	}
 	
-	public void update(UserBall b){
-		if (b.getBounds().intersects(getBounds())){
+	public void update(UserBall b, PlayerStatus playerStatus){
+		if (b.getBounds().intersects(getBounds()) && !gotten){
 			gotten = true;
+			playerStatus.GotCoin();
 		}
 	}
 	

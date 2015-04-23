@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import points.PlayerStatus;
 import levels.LevelLibrary;
 import levels.LevelObject;
 
@@ -29,17 +30,18 @@ public class Game extends Applet implements Runnable, KeyListener{
     Platform Plat[];
     Coin Cn[];
     GoalCoin GC;
+    PlayerStatus playerStatus;
     
     
     @Override
     public void init() {
         setSize(800, 600);
         addKeyListener(this); // this is the key listener we are implementing
-        
     }
 
     @Override
     public void start() {
+    	playerStatus = new PlayerStatus(); 
     	LvlLibrary = new LevelLibrary();
     	Ball = new UserBall();
     	CurrentLvl = LvlLibrary.getLevel_1();
@@ -66,10 +68,11 @@ public class Game extends Applet implements Runnable, KeyListener{
         	for (Platform P : CurrentLvl.getPlat()){
         		P.update(Ball);
         	}
-        	CurrentLvl.getGC().update(Ball);
+        	CurrentLvl.getGC().update(Ball, playerStatus);
         	for (Coin coin : CurrentLvl.getCoin()){
-        		coin.update(Ball);
+        		coin.update(Ball, playerStatus);
         	}
+        	playerStatus.update();
             repaint(); // goes through update() then calls paint()
             try {
                 Thread.sleep(17);
@@ -115,6 +118,7 @@ public class Game extends Applet implements Runnable, KeyListener{
     	for (Coin coin : CurrentLvl.getCoin()){
     		coin.paint(g);
     	}
+    	playerStatus.paint(g);
     }
 
     public void keyTyped(KeyEvent arg0) {
@@ -139,6 +143,10 @@ public class Game extends Applet implements Runnable, KeyListener{
             case KeyEvent.VK_DOWN:
             	// call object methods that happen when key is pressed
             	Ball.slow();
+                break;
+            case KeyEvent.VK_ENTER:
+            	// call object methods that happen when key is pressed
+            	CurrentGC.setGotten(true);
                 break;
         }
     }

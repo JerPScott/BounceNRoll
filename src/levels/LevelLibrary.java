@@ -9,14 +9,20 @@ public class LevelLibrary {
 	 * This class defines the properties of the different levels
 	 * 
 	 **/
-	LevelObject Level_1, Level_2;
+	LevelObject Level_1, Level_2, Level_3;
 	
+	// Level 1 objects
 	GoalCoin GC_1;
 	Platform Plat_1[] = new Platform[3];
 	Coin Cn_1[] = new Coin[10];
+	// Level 2 objects
 	GoalCoin GC_2;
 	Platform Plat_2[] = new Platform[4];
 	Coin Cn_2[] = new Coin[8];
+	// Level 3 objects
+	GoalCoin GC_3;
+	Platform Plat_3[] = new Platform[6];
+	Coin Cn_3[] = new Coin[8];
 			
 	public LevelLibrary(){
 		// Level one game objects
@@ -50,8 +56,26 @@ public class LevelLibrary {
 		Cn_2[6] = new Coin(400, 400);
 		Cn_2[7] = new Coin(440, 400);
 		
+		// Level three game objects
+		GC_3 = new GoalCoin(700, 50);
+		Plat_3[0] = new Platform(360, 520, 80, 160);
+		Plat_3[1] = new Platform(260, 420, 80, 160);
+		Plat_3[2] = new Platform(160, 320, 80, 160);
+		Plat_3[3] = new Platform(260, 220, 80, 160);
+		Plat_3[4] = new Platform(360, 120, 80, 160);
+		Plat_3[5] = new Platform(460, 120, 80, 160);
+		Cn_3[0] = new Coin(650, 100);
+		Cn_3[1] = new Coin(520, 220);
+		Cn_3[2] = new Coin(520, 320);
+		Cn_3[3] = new Coin(520, 420);
+		Cn_3[4] = new Coin(520, 520);
+		Cn_3[5] = new Coin(520, 620);
+		Cn_3[6] = new Coin(80, 100);
+		Cn_3[7] = new Coin(110, 100);
+		
 		// pulling together levels
-		Level_2 = new LevelObject(GC_2, Cn_2, Plat_2, null);
+		Level_3 = new LevelObject(GC_3, Cn_3, Plat_3, null);
+		Level_2 = new LevelObject(GC_2, Cn_2, Plat_2, Level_3);
 		Level_1 = new LevelObject(GC_1, Cn_1, Plat_1, Level_2);
 	}
 	
@@ -61,6 +85,10 @@ public class LevelLibrary {
 	
 	public LevelObject getLevel_2(){
 		return Level_2;
+	}
+	
+	public LevelObject getLevel_3(){
+		return Level_3;
 	}
 	
 }

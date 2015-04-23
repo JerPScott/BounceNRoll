@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import points.PlayerStatus;
+
 public class GoalCoin {
 	/**
 	 * This object serves as the win condition of the level and is similar to coins.
@@ -19,9 +21,10 @@ public class GoalCoin {
 		Py = yPos;
 	}
 	
-	public void update(UserBall b){
-		if (b.getBounds().intersects(getBounds())){
+	public void update(UserBall b, PlayerStatus playerStatus){
+		if (b.getBounds().intersects(getBounds()) && !gotten){
 			gotten = true;
+			playerStatus.GotGCoin();
 		}
 	}
 	
@@ -43,6 +46,10 @@ public class GoalCoin {
 	
 	public boolean getGotten(){
 		return gotten;
+	}
+	
+	public void setGotten(boolean isGotten){
+		gotten = isGotten;
 	}
 	
 }
